@@ -84,29 +84,29 @@ class Bing_BOT():
                 # Bing Chatをスタートさせる為に必要
                 await self.Bing_instance.start_conversation()
                 text = message.content.lstrip('+')
-                img_exist = True
+                #img_exist = True
 
-                if len(message.attachments) > 0:
+                #if len(message.attachments) > 0:
 
                 # 添付ファイルが1つでもある場合は順番に送信する
-                    for url in message.attachments:
-                        file    = requests.get(url)
+                #    for url in message.attachments:
+                #        file    = requests.get(url)
 
-                        if file.status_code == 200:
-                            res = await self.Bing_instance.compose_stream(input_text=text, image=file.content, lang='ja')['content']
-                            await self.send_split_message(message, res)
+                 #       if file.status_code == 200:
+                 #           res = await self.Bing_instance.compose_stream(input_text=text, image=file.content, lang='ja')['content']
+                 #           await self.send_split_message(message, res)
 
-                        else:
-                            img_exist = False
+                 #       else:
+                 #           img_exist = False
 
-                    # エラーメッセージ
-                    if img_exist == False:
-                        await message.channel.send('申し訳ありません。一部画像が読み取れませんでした。\n\
-                                                    画像のURLが正しいかご確認してください。')
+                 #   # エラーメッセージ
+                 #   if img_exist == False:
+                 #       await message.channel.send('申し訳ありません。一部画像が読み取れませんでした。\n\
+                 #                                   画像のURLが正しいかご確認してください。')
 
-                else:
-                    res = await self.Bing_instance.compose_stream(text, tone='professional', format='ideas', length='medium')
-                    await self.send_split_message(message, res)
+                #else:
+                res = await self.Bing_instance.compose_stream(text, tone='professional', format='ideas', length='medium')
+                await self.send_split_message(message, res)
 
 
         # 返信もらった時
